@@ -16,6 +16,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.3",
     "autoprefixer": "^10.4.7",
     "cssnano": "^5.1.12",
     "gatsby": "^4.19.2",
@@ -34,6 +35,7 @@
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-helmet": "^6.1.0",
+    "react-redux": "^8.0.2",
     "sort-css-media-queries": "^2.0.4"
   },
   "devDependencies": {

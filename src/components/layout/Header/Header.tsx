@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import styles from './Header.module.scss'
+import * as styles from './Header.module.scss'
 import { FCProps } from '../../../types'
 import Logotype from '../../common/Logotype'
 import { VectorIcon } from '../../common/Icon'
@@ -9,7 +9,7 @@ const mockList1 = ['home', 'news', 'about', 'careers']
 const mockLlist2 = ['your applications', 'our solutions', 'service', 'contacts']
 const Header: FC<HeaderProps> = () => (
   <header className={styles.header}>
-    <div className="block xl:hidden">Menu</div>
+    {/*  <div className="block xl:hidden">Menu</div>
     <div className="h-5 w-40 xl:h-12 xl:w-72">
       <Logotype />
     </div>
@@ -35,7 +35,7 @@ const Header: FC<HeaderProps> = () => (
         </ul>
       </nav>
     </div>
-    <div className="block xl:hidden">X</div>
+    <div className="block xl:hidden">X</div> */}
   </header>
 )
 
