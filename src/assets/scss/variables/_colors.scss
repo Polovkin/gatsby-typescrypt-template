@@ -1,0 +1,70 @@
+@function color-lookup( $color, $palette ) {
+  @if map-has-key($palette, $color) {
+    @return map-get($palette, $color);
+  }
+  @warn 'Unknown `#{$color}` in `#{$palette}`!';
+  @return null;
+}
+
+@function color( $color ) {
+  @return color-lookup($color, $color-palette);
+}
+
+$brand-colors: (
+  primary: #EE3026,
+  secondary: #5066B0,
+  tertiary: #191F34,
+) !default;
+
+$main-colors: (
+  dark: #000,
+  light: #fff,
+  error: #db5858,
+  success: #83d66d,
+  warning: #d9b460
+);
+
+$gray-colors: (
+  gray-primary: #d6d7db,
+  gray-secondary: #acafb7,
+);
+
+$white-opacity: (
+  white-opacity-03: rgba(#fff, .3),
+  white-opacity-04: rgba(#fff, .4),
+  white-opacity-05: rgba(#fff, .5),
+);
+
+$color-palette: map_merge($brand-colors, $main-colors);
+$color-palette: map_merge($color-palette, $gray-colors);
+$color-palette: map_merge($color-palette, $white-opacity);
+
+// Brand colors
+$color__primary         : color(primary);
+$color__secondary       : color(secondary);
+$color__tertiary        : color(tertiary);
+
+// Base colors
+$color__light           : color(light);
+$color__dark            : color(dark);
+$color__error           : color(error );
+$color__success         : color(success);
+$color__warning         : color(warning);
+
+//Gray
+$gray__primary           : color(gray-primary);
+$gray__secondary         : color(gray-secondary);
+
+// white opacity
+$white-opacity-03        : color(white-opacity-03);
+$white-opacity-04        : color(white-opacity-04);
+$white-opacity-05        : color(white-opacity-05);
+
+//Font-color
+$color__font--primary    : color(tertiary);
+$color__font--secondary  : color(light);
+$color__font--tertiary   : color(primary);
+
+
+
+

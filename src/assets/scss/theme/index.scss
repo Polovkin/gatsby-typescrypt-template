@@ -1,0 +1,25 @@
+@import '/src/assets/scss/global/index';
+
+/** {
+  box-sizing: border-box;
+
+  &::-webkit {
+    width: 10px;
+
+    &-scrollbar {
+      width: 10px;
+
+      &-track {
+        background: #f1f1f1;
+      }
+
+      &-thumb {
+        background: lighten($color__secondary, 15%);
+      }
+
+      &-thumb:hover {
+        background: lighten($color__secondary, 20%);
+      }
+    }
+  }
+}*/

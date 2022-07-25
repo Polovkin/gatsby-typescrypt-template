@@ -1,0 +1,146 @@
+
+
+@function set-breakpoint($from,$to,$height: null) {
+  @return $from $to
+}
+
+@function get-breakpoint( $name ) {
+  @return breakpoint-lookup($name, $breakpoints-list);
+}
+@function breakpoint-lookup( $name, $list ) {
+  @if map-has-key($list, $name) {
+    @return map-get($list, $name);
+  }
+  @warn 'Unknown `#{$name}` in `#{$list}`!';
+  @return null;
+}
+
+$breakpoint-desktop: (
+  desktop     : 1920px,
+  desktop-sm  : 1600px,
+  laptop      : 1366px,
+  laptop-sm   : 1200px,
+);
+$breakpoint-tablet: (
+  landscape   : 1024px,
+  portrait    : 768px,
+);
+$breakpoint-mobile: (
+  mobile-small  : 320px,
+  mobile-min    : 0px,
+);
+$breakpoint-height: (
+  mobile-height-max  : 460px,
+  laptop-height-max  : 767px,
+);
+$breakpoints-list: map_merge($breakpoint-desktop, $breakpoint-tablet);
+$breakpoints-list: map_merge($breakpoints-list, $breakpoint-mobile);
+$breakpoints-list: map_merge($breakpoints-list, $breakpoint-height);
+
+$desktop      : get-breakpoint(desktop);
+$desktop-min  : get-breakpoint(desktop-sm);
+$laptop       : get-breakpoint(laptop);
+$laptop-min   : get-breakpoint(laptop-sm);    //XL
+
+$tablet-land  : get-breakpoint(landscape);    //MD
+$tablet-port  : get-breakpoint(portrait);     //MD
+$mobile-min   : get-breakpoint(mobile-small); //XS
+$min          : get-breakpoint(mobile-min);   //Min
+
+$mobile-height: get-breakpoint(mobile-height-max);
+$laptop-height: get-breakpoint(laptop-height-max);
+
+$mobile__all          : set-breakpoint($min,$laptop-min);
+
+$desktop__laptop      : set-breakpoint($laptop-min,$desktop-min);
+$desktop__laptop-min  : set-breakpoint($laptop-min,$laptop) (max-height $laptop-height);
+
+$tablet__landscape    : set-breakpoint($tablet-land,$laptop-min);
+$tablet__portrait     : set-breakpoint($tablet-port,$tablet-land - 1);
+
+$phone__all           : set-breakpoint($min,$tablet-port - 1);
+$phone__landscape     : set-breakpoint($min,$tablet-land) (max-height $mobile-height);
+$phone__small         : set-breakpoint($min,$mobile-min);
+
+
+
+@mixin hover-effect {
+  @include ie11 {
+
+    &:hover {
+      @content;
+    }
+  }
+  @media (hover: hover) and (pointer: fine) {
+
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin media-desktop-all {
+  @include breakpoint($laptop-min) {
+    @content;
+  }
+}
+
+@mixin media-desktop-laptop {
+  @include breakpoint($desktop__laptop) {
+    @content;
+  }
+}
+
+@mixin media-desktop-laptop-small {
+  @include breakpoint($desktop__laptop-min) {
+    @content;
+  }
+}
+
+@mixin media-mobile-device-all {
+  @include breakpoint($phone__all) {
+    @content;
+  }
+  @include media-tablet-all {
+    @content;
+  }
+}
+
+@mixin media-tablet-all {
+  @include breakpoint($tablet__landscape) {
+    @content;
+  }
+  @include breakpoint($tablet__portrait) {
+    @content;
+  }
+}
+
+@mixin media-tablet-landscape {
+  @include breakpoint($tablet__landscape) {
+    @content;
+  }
+}
+
+@mixin media-tablet-portrait {
+  @include breakpoint($tablet__portrait) {
+    @content;
+  }
+}
+
+@mixin media-phone {
+  @include breakpoint($phone__all) {
+    @content;
+  }
+}
+
+@mixin media-phone-landscape {
+  @include breakpoint($phone__landscape) {
+    @content;
+  }
+}
+
+@mixin media-phone-small {
+  @media (max-width: 400px) {
+    @content;
+  }
+}
