@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 import * as styles from './Header.module.scss'
 import { FCProps } from '../../../types'
-import Logotype from '../../common/Logotype'
-import { VectorIcon } from '../../common/Icon'
+// import Logotype from '../../common/Logotype'
+// import { VectorIcon } from '../../common/Icon'
 
 type HeaderProps = FCProps
-const mockList1 = ['home', 'news', 'about', 'careers']
-const mockLlist2 = ['your applications', 'our solutions', 'service', 'contacts']
+// const mockList1 = ['home', 'news', 'about', 'careers']
+// const mockLlist2 = ['your applications', 'our solutions', 'service', 'contacts']
 const Header: FC<HeaderProps> = () => (
   <header className={styles.header}>
     {/*  <div className="block xl:hidden">Menu</div>
